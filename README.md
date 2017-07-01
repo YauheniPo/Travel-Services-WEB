@@ -1,4 +1,4 @@
-travel-services-WEB
+# travel-services-WEB
 
 The project represents a website, which offers customers 3 types of services related to travelling:
 - Tour agency
