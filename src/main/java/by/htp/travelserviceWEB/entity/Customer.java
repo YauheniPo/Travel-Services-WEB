@@ -15,16 +15,13 @@ public class Customer implements Serializable {
 	private String passport;
 	private String email;
 	private String phoneNumber;
-	private String driverLicence;
+	private String driverLicense;
 	private Role role;
 	
-	public Customer() {
-		super();
-	}
+	public Customer() {}
 
 	public Customer(Integer customerId, String login, String password, String name, String surname, String gender,
-			Date birthday, String passport, String email, String phoneNumber, String driverLicence, Role role) {
-		super();
+			Date birthday, String passport, String email, String phoneNumber, String driverLicense, Role role) {
 		this.customerId = customerId;
 		this.login = login;
 		this.password = password;
@@ -35,7 +32,7 @@ public class Customer implements Serializable {
 		this.passport = passport;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		this.driverLicence = driverLicence;
+		this.driverLicense = driverLicense;
 		this.role = role;
 	}
 
@@ -119,12 +116,12 @@ public class Customer implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getDriverLicence() {
-		return driverLicence;
+	public String getDriverLicense() {
+		return driverLicense;
 	}
 
-	public void setDriverLicence(String driverLicence) {
-		this.driverLicence = driverLicence;
+	public void setDriverLicense(String driverLicense) {
+		this.driverLicense = driverLicense;
 	}
 
 	public Role getRole() {
