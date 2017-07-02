@@ -19,27 +19,24 @@
 					src="${pageContext.request.contextPath}/image/logoF.png"
 					width="180"> </a>
 				<c:if test="${customer==null}">
-					<form name="sign_in" action="${pageContext.request.contextPath}/jsp/log_in_page.jsp">
+					<form name="sign_in" action="${pageContext.request.contextPath}/Controller" method="GET">
+						<input type="hidden" value="log_in_page" name="command" />
 						<button type="submit">SIGN IN</button>
 					</form>
 
 					<form name="sign_up"
-						action="${pageContext.request.contextPath}/Controller"
-						method="GET">
+						action="${pageContext.request.contextPath}/Controller"	method="GET">
 						<input type="hidden" value="sign_up_page" name="command" />
 						<button type="submit">SIGN UP</button>
 					</form>
 				</c:if>
 				<c:if test="${customer!=null}">
-					<form name="sign_up">
+					<form name="sign_up" action="${pageContext.request.contextPath}/Controller" method="GET">
+						<input type="hidden" value="log_out" name="command" />
 						<tr>
 							<td>${customer.getLogin()}</td>
 						</tr>
-						<button type="submit">
-							<a
-								href="${pageContext.request.contextPath}/Controller?command=log_out">
-								LOG OUT </a>
-						</button>
+						<button type="submit">LOG OUT</button>
 					</form>
 				</c:if>
 
