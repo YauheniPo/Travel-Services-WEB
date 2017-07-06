@@ -1,7 +1,10 @@
 package by.htp.travelserviceWEB.commander;
 
+import java.io.IOException;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +23,7 @@ private ServiceFactory serviceFactory;
 	
 	private Customer customer;
 	private UserTO userDTO;
+	private String page;
 
 	public SignUpAction() {
 		serviceFactory = ServiceFactory.getInstance();
@@ -41,7 +45,14 @@ private ServiceFactory serviceFactory;
 		String driverLicence;
 		Role role;
 		
-		password = Encryption.md5Apache(request.getParameter("password"));
+		password = request.getParameter("password");
+		String repPassword = request.getParameter("repeat_password");
+		if (!password.equals(repPassword)) {
+			page = "jsp/sign_up_page.jsp";
+			request.setAttribute("msg", "Repeat password incorrectly.");
+			request.getRequestDispatcher(page);
+		}
+		password = Encryption.base64Code(request.getParameter("password"));
 		login = request.getParameter("login");
 		name = request.getParameter("name");
 		surname = request.getParameter("surname");
@@ -64,7 +75,6 @@ private ServiceFactory serviceFactory;
 	
 	private String getPage(HttpServletRequest request, HttpServletResponse response) {
 		
-		String page;
 		Customer customer;
 		
 		HttpSession httpSession = request.getSession();
