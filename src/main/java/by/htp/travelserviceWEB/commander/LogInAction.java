@@ -4,6 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.log4j.Logger;
 
@@ -12,11 +13,13 @@ import by.htp.travelserviceWEB.entity.Customer;
 import by.htp.travelserviceWEB.entity.dto.UserTO;
 import by.htp.travelserviceWEB.service.factory.ServiceFactory;
 import by.htp.travelserviceWEB.util.EncryptionFdl;
+import by.htp.travelserviceWEB.util.ReturnToTheOriginalPage;
 
 public class LogInAction implements CommandAction {
 	
 	private ServiceFactory serviceFactory; 
 	private static final Logger log = Logger.getLogger(LogInAction.class);
+	private Customer customer;
 	
 	public LogInAction() {
 		serviceFactory = ServiceFactory.getInstance();
@@ -25,8 +28,7 @@ public class LogInAction implements CommandAction {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String page;		
-		Customer customer;
-		Admin admin;
+		Admin admin = null;
 		UserTO userDTO;
 		
 		//produce session
@@ -47,18 +49,23 @@ public class LogInAction implements CommandAction {
 				return page;
 			}
 			httpSession.setAttribute("user", admin);
-		
-			page = "jsp/admin_page.jsp";
+			log.info("Log in admin " + admin.getLogin());
+			page = ReturnToTheOriginalPage.getOriginalPage(request.getHeader("referer"), request);
+			httpSession.setAttribute("originalPage",  null);
 		}
 		else {
 			httpSession.setAttribute("user", customer);
-			
-			response.addCookie(new Cookie("log", login));
-			response.addCookie(new Cookie("passw", passwordEncrypt));
-
-			page = "jsp/home_page.jsp";
+			//input data in Cookie
+			inputCookie(request, response);
+			log.info("Log out " + (admin != null ? "admin" + admin.getLogin() : "customer" + customer.getLogin()));
+			page = ReturnToTheOriginalPage.getOriginalPage(request.getHeader("referer"), request);
+			httpSession.setAttribute("originalPage",  null);
 		}
-		log.info("Log in " + ((Customer)httpSession.getAttribute("user")).getLogin());
 		return page;
+	}
+	
+	private void inputCookie(HttpServletRequest request, HttpServletResponse response) {
+		response.addCookie(new Cookie("log", this.customer.getLogin()));
+		response.addCookie(new Cookie("passw", this.customer.getPassword()));
 	}
 }

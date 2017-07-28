@@ -8,10 +8,10 @@ import javax.servlet.ServletException;
 
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import by.htp.travelserviceWEB.util.Validator;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith (ProjectRunner.class)
 public class ValidatorTest {

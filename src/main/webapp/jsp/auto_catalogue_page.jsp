@@ -40,18 +40,37 @@
 					</form>
 				</c:if>
 				<c:if test="${user != null}">
-					<form name="sign_up"
-						action="${pageContext.request.contextPath}/Controller"
-						method="GET">
+					<form name="sign_up" action="${pageContext.request.contextPath}/Controller" method="GET">
+					<tr>
+						<a href="${pageContext.request.contextPath}/Controller?command=update_account_page"><td>${user.getLogin()}</td></a>
+					</tr>
 						<input type="hidden" value="log_out" name="command" />
-						<tr>
-							<td>${user.getLogin()}</td>
-						</tr>
-						<button type="submit">LOG OUT</button>
+						<button name="log_out" type="submit">LOG OUT</button>
 					</form>
 				</c:if>
 			</header>
-			<jsp:include page="/jspf/menu.jspf" />
+			<hr>
+			<div class="menu_center">
+				<nav>
+					<ul class="top-menu">
+						<li id="about"><a href="/home/">ABOUT US</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/Controller?command=tour_catalogue_page">TOUR
+								CATALOGUE</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/Controller?command=hotel_catalogue_page">HOTEL
+								CATALOGUE</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/Controller?command=auto_catalogue_page">CAR
+								CATALOGUE</a></li>
+						<li><a href="mailto:info@fidelio.com">EMAIL US</a></li>
+					</ul>
+					<select id="lang">
+						<option value="RU">RUSSIAN</option>
+						<option selected value="EN">ENGLISH</option>
+					</select>
+				</nav>
+			</div>
 			<hr>
 			<div>
 				<aside>
@@ -104,7 +123,8 @@
 					</nav>
 				</aside>
 				<div>
-					<form action="${pageContext.request.contextPath}/Controller" method="GET">
+					<form action="${pageContext.request.contextPath}/Controller"
+						method="GET">
 						<input type="hidden" name="command" value="auto_make_order">
 						<div>
 							<table>
@@ -119,7 +139,7 @@
 								<c:forEach items="${list_rentAuto}" var="i">
 									<tr>
 										<td><input type="radio" name="id"
-											value="${i.getRentAutoId()}"/></td>
+											value="${i.getRentAutoId()}" /></td>
 										<td><img src="${i.getImage()}"></td>
 										<td>${i.getAuto().toStringModel()}</td>
 										<td>${i.getAuto().toStringCharacteristic()}</td>

@@ -1,5 +1,7 @@
 package by.htp.travelserviceWEB.service.impl;
 
+import java.sql.SQLException;
+
 import by.htp.travelserviceWEB.dao.factory.DaoFactory;
 import by.htp.travelserviceWEB.entity.Admin;
 import by.htp.travelserviceWEB.entity.Customer;
@@ -32,8 +34,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Customer registrationCustomer(Customer customer) {
+	public Customer registrationCustomer(Customer customer) throws SQLException {
 		return daoFactory.getUserDao().makeCustomer(customer);
+	}
+
+	@Override
+	public Customer updateAccountCustomer(Customer customer) throws SQLException {
+		return daoFactory.getUserDao().updateAccountCustomer(customer);
 	}
 
 }
