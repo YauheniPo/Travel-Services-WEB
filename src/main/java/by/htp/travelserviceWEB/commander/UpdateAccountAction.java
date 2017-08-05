@@ -12,68 +12,73 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import by.htp.travelserviceWEB.entity.Customer;
-import by.htp.travelserviceWEB.entity.dto.UserTO;
-import by.htp.travelserviceWEB.service.factory.ServiceFactory;
+import by.htp.travelserviceWEB.entity.dto.CustomerTOLP;
+import by.htp.travelserviceWEB.entity.dto.CustomerTOUpdate;
+import by.htp.travelserviceWEB.service.CustomerService;
+import by.htp.travelserviceWEB.service.impl.CustomerServiceImpl;
 import by.htp.travelserviceWEB.util.EncryptionFdl;
 import by.htp.travelserviceWEB.util.ReturnToTheOriginalPage;
 import by.htp.travelserviceWEB.util.Validator;
 
+import static by.htp.travelserviceWEB.util.Formatter.*;
+
 public class UpdateAccountAction implements CommandAction {
 
-	private ServiceFactory serviceFactory;
+	private CustomerService customerService;
 	private static final Logger log = Logger.getLogger(LogInAction.class);
 	private Customer customer;
+	private CustomerTOUpdate customerTOUpdate;
 
 	public UpdateAccountAction() {
-		serviceFactory = ServiceFactory.getInstance();
+		customerService = CustomerServiceImpl.getInstance();
+		customerTOUpdate = new CustomerTOUpdate();
 	}
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String page;
-		
+		CustomerTOLP customerTOLP;
 		HttpSession httpSession = request.getSession();
-		UserTO userTO;
+		customer = (Customer)httpSession.getAttribute("user");
+		//Customer copyCustomer = null;
+		customerTOUpdate = (CustomerTOUpdate) newInstance(request, customerTOUpdate);
 		
-		String login = request.getParameter("login");
-		String name = request.getParameter("name");
-		String surname = request.getParameter("surname");
-		String password = EncryptionFdl.encrypt(request.getParameter("password"));
-		String passwordRepeat = EncryptionFdl.encrypt(request.getParameter("password_repeat"));
-		String passport = request.getParameter("passport");
-		String email = request.getParameter("email");
-		String phoneNumber = request.getParameter("phone_number");
-		String birthday = request.getParameter("birthday");
-		String gender = request.getParameter("gender");
-		String driverLicence = request.getParameter("driver_licence");
+		/*try {
+			copyCustomer = (Customer) customer.clone();
+		} catch (CloneNotSupportedException e1) {
+			e1.printStackTrace();
+		}*/
 		
-		if (!Validator.registrationCustomer(login, password, passwordRepeat, name, surname, birthday, passport, email, phoneNumber)) {
+		String passwordRepeat = request.getParameter("password_repeat");
+		
+		if (!Validator.checkForCorrentInputDataCustomer(customerTOUpdate, passwordRepeat)) {
 			page = "jsp/update_account_page.jsp";
 			request.setAttribute("msg", "Incorrect data entry.");
 			return page;
 		}
 		else {
-			//create userTO
-			userTO = new UserTO(login, password);
-			
-			customer = new Customer(((Customer)httpSession.getAttribute("user")).getCustomerId(), login, password, name, surname, gender, birthday, passport, email,
-					phoneNumber, driverLicence, ((Customer)httpSession.getAttribute("user")).getIdRole());
+			customer.setPassport(EncryptionFdl.encrypt(customerTOUpdate.getPassword()));
+			customer.setGender(customerTOUpdate.getGender());
+			customer.setBirthday(customerTOUpdate.getBirthday());
+			customer.setEmail(customerTOUpdate.getEmail());
+			customer.setPhoneNumber(customerTOUpdate.getPhoneNumber());
+			customer.setDriverLicence(customerTOUpdate.getDriverLicence());
 			try {
-				serviceFactory.getUserService().updateAccountCustomer(customer);
-				httpSession.setAttribute("user", customer);
-				// input data in Cookie
-				inputCookie(request, response);
-				page = ReturnToTheOriginalPage.getOriginalPage(request.getHeader("referer"), request);
-				log.info("Update account " + customer.getLogin());
+				customerService.updateAccountCustomer(customer);
 			}
 			catch (SQLException e) {
 				page = "jsp/update_account_page.jsp";
 				request.setAttribute("msg", "There is a user with such data.");
 				log.info("Update account is fail " + ((Customer)httpSession.getAttribute("user")).getLogin());
 			}
+			httpSession.setAttribute("user", customer);
+			// input data in Cookie
+			inputCookie(request, response);
+			page = ReturnToTheOriginalPage.getOriginalPage(request.getHeader("referer"), request);
+			log.info("Update account " + customer.getLogin());
+			return page;
 		}
-		return page;
 	}
 	
 	private void inputCookie(HttpServletRequest request, HttpServletResponse response) {

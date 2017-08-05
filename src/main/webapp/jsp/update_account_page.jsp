@@ -62,28 +62,6 @@
 				<input type="hidden" name="command" value="update_account" />
 
 				<div class='form-row'>
-					<label for="name"> <span>Name</span> <input
-						type='text' value="${user.getName()}" id="name" name='name' required>
-						<ul class="input-requirements">
-							<li>Should be at least 1 character long.</li>
-							<li>Should only contain letters.</li>
-							<li>Should start with an uppercase letter.</li>
-						</ul>
-					</label>
-				</div>
-
-				<div class='form-row'>
-					<label for="surname"> <span>Surname</span> <input
-						type='text' value="${user.getSurname()}" id="surname" name='surname' required>
-						<ul class="input-requirements">
-							<li>Should be at least 1 characters long.</li>
-							<li>Should only contain letters.</li>
-							<li>Should start with an uppercase letter.</li>
-						</ul>
-					</label>
-				</div>
-
-				<div class='form-row'>
 					<label for="password"> <span>Old password</span> <input
 						type="password" <%--value="user1Q@q"--%> name='password'
 						id="password" required>
@@ -112,7 +90,7 @@
 				</div>
 				
 				<div class='form-row'>
-					<label for="password_repeat"> <span> Repeat new password
+					<label for="password_repeat"> <span>Repeat password
 					</span> <input type="password" <%--value="user1Q@q"--%> name='repeat_password'
 						id="password_repeat" required>
 					</label>
@@ -149,13 +127,6 @@
 							title="Format: YYYY-MM-DD" name="birthday" id="birthday"/>
 						</font>
 					</label>
-				</div>
-				
-				<div style="width: 100%; height: 1px; clear: both;"></div>
-				
-				<div class='form-row'>
-					<label>Passport </label> <input 
-					 value="${user.getPassport()}" name='passport' id="passport" required>
 				</div>
 				
 				<div style="width: 100%; height: 1px; clear: both;"></div>
