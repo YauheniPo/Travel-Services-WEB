@@ -20,8 +20,9 @@ Admin performs following functions:
 - fetching info about orders: by service, by user, by period.
 
 Project realisation details:
-- MySQL JDBC with connection pool;
+- MySQL JDBC and own connection pool;
 - MVC model;
-- Factory method, Command, Singletone;
+- Factory method, Command, Singletone, Query Builder;
 - JSP with JSTL;
-- sessions and filters.
+- sessions, cookie, encryption and filters, own tag;
+- JUnit and Selenium Tasts.
