@@ -19,10 +19,6 @@ Admin performs following functions:
 - marking damaged cars and creating a bill for the clients;
 - fetching info about orders: by service, by user, by period.
 
-Additional functions:
-- Soon expiring offers are marked as "hot";
-- Clients with more than 3 orders are marked as "vip".
-
 Project realisation details:
 - MySQL JDBC with connection pool;
 - MVC model;
