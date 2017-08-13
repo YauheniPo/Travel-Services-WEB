@@ -1,4 +1,4 @@
-<nav style="height: 36px;">
+<nav>
 	<ul class="top-menu">
 		<li id="about"><a href="/home/">ABOUT US</a></li>
 		<li><a href="${pageContext.request.contextPath}/Controller?command=tour_catalogue_page">TOUR CATALOGUE</a></li>

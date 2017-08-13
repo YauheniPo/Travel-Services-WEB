@@ -1,1 +1,0 @@
-XML: RFA: 2017-08-10 05:15 PM [http-nio-8080-exec-5] INFO  by.htp.travelserviceWEB.commander.SignUpAction - Sign up is fail com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
