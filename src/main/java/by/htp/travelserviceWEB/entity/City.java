@@ -31,5 +31,4 @@ public class City implements Entity, Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 }
