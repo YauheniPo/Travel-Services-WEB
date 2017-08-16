@@ -23,6 +23,8 @@
 			
 			<hr>
 
+			<%-- <%@include file="../jspf/msg.jspf"%> --%>
+
 			<%@include file="../jspf/photo_description.jspf" %>
 		</div>
 		

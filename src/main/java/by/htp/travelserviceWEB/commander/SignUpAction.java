@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import by.htp.travelserviceWEB.entity.Customer;
+import by.htp.travelserviceWEB.entity.User;
 import by.htp.travelserviceWEB.entity.dto.AdminTOWP;
 import by.htp.travelserviceWEB.entity.dto.CustomerTO;
 import by.htp.travelserviceWEB.entity.dto.CustomerTOLP;
@@ -31,7 +32,7 @@ public class SignUpAction implements CommandAction {
 	
 	private HttpSession httpSession;
 	private CustomerTO customerTO;
-	private Customer customer;
+	private User customer;
 	private CustomerTOLP customerTOLP;
 	private String page;
 
@@ -44,9 +45,7 @@ public class SignUpAction implements CommandAction {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		customerTO = (CustomerTO) newInstance(request, customerTO);
-		//customerTO.setPassword(EncryptionFdl.encrypt(customerTO.getPassword()));
-		          
-		//String passwordRepeatEncrypt = EncryptionFdl.encrypt(request.getParameter(listOfParametersForSignUp.get(listOfParametersForSignUp.size() - 1)));
+
 		String passwordRepeat = request.getParameter("password_repeat");
 		
 		if (!Validator.checkForCorrentInputDataCustomer(customerTO, passwordRepeat)) {
@@ -56,7 +55,6 @@ public class SignUpAction implements CommandAction {
 		}
 		else {
 			customerTO.setPassword(EncryptionFdl.encrypt(customerTO.getPassword()));
-			//create customerTOLP
 			customerTOLP = new CustomerTOLP(customerTO.getLogin(), customerTO.getPassword());
 			return getPage(request, response);
 		}
@@ -95,6 +93,6 @@ public class SignUpAction implements CommandAction {
 	
 	private void inputCookie(HttpServletRequest request, HttpServletResponse response) {
 		response.addCookie(new Cookie("log", this.customer.getLogin()));
-		response.addCookie(new Cookie("passw", this.customer.getPassword()));
+		response.addCookie(new Cookie("passw", ((Customer)this.customer).getPassword()));
 	}
 }
