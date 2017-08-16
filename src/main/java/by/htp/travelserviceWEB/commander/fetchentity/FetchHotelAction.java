@@ -1,8 +1,6 @@
 package by.htp.travelserviceWEB.commander.fetchentity;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -26,16 +24,12 @@ public class FetchHotelAction implements CommandAction {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String page = "jsp/hotel_catalogue_page.jsp";
+		String page = "jsp/index.jsp";
 		
-		List<Entity> list = hotelService.fillingSelectPickUpHotel(new Hotel());
-		
-		Map<Integer, Entity> map = new HashMap<Integer, Entity>();
-		for(Entity entity : list) {
-			map.put(((Hotel)entity).getHotelId(), (Hotel) entity);
-		}
-		request.setAttribute("HOTEL_MAP", map);
+		Map<Integer, Entity> map = hotelService.fillingListByTheHotels(new Hotel());
+		request.setAttribute("hotel_map", map);
 		
 		return page;
 	}
+
 }
