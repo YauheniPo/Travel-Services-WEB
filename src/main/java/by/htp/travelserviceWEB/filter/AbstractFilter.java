@@ -15,4 +15,5 @@ public abstract class AbstractFilter implements Filter, Serializable {
 
 	@Override
 	public void destroy() {}
+	
 }
