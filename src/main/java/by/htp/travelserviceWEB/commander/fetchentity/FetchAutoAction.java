@@ -9,25 +9,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.travelserviceWEB.commander.CommandAction;
 import by.htp.travelserviceWEB.entity.Entity;
-import by.htp.travelserviceWEB.entity.auto.Salon;
-import by.htp.travelserviceWEB.service.auto.SalonService;
-import by.htp.travelserviceWEB.service.auto.impl.SalonServiceImpl;
+import by.htp.travelserviceWEB.entity.auto.Auto;
+import by.htp.travelserviceWEB.service.auto.AutoService;
+import by.htp.travelserviceWEB.service.auto.impl.AutoServiceImpl;
 
-public class FetchSalonAction implements CommandAction {
+public class FetchAutoAction implements CommandAction {
 	
-	private SalonService salonService;
+	private AutoService autoService;
 	
-	public FetchSalonAction() {
-		salonService = SalonServiceImpl.getInstance();
+	public FetchAutoAction() {
+		autoService = AutoServiceImpl.getInstance();
 	}
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String page = "jsp/index.jsp";
-		
-		Map<Integer, Entity> map = salonService.fillingListByTheSolons(new Salon());
-		request.setAttribute("salon_map", map);
+
+		Map<Integer, Entity> map = autoService.fillingListByTheAutoes(new Auto());
+		request.setAttribute("auto_map", map);
 		
 		return page;
 	}

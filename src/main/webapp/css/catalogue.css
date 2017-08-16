@@ -80,17 +80,21 @@ input {
 	width: 200px;
 }
 
+
+
 aside {
 	float: left;
 	width: 200px;
 	margin-right: 30px;
 	margin-bottom: 20px;
+	position:fixed;
+    bottom:0;
 }
 
 .head-cont {
-	margin-top: 15px;
-	margin-bottom: 10px;
-	font-size: 1.5em;
+	/* margin-top: 15px;
+	margin-bottom: 10px; */
+	font-size: 1.2em;
 	font-weight: bold;
 }
 
@@ -101,6 +105,7 @@ table {
 	margin-top: 10px;
 	/* padding-bottom: 10px; */
 	border-collapse: collapse;
+	margin-left: 230px;
 }
 
 .table img {
@@ -145,27 +150,33 @@ div input [type="date"] {
 }
 
 .div_tr {
-	height: 10px;
+	/* height: 10px; */
 	background-color: #f8f8f8;
 	opacity: 0;
 }
 
+.col1 {
+	width: 220px;
+}
+
+.col2 {
+	width: 150px;
+}
+
 .col3 {
-	width: 50px;
+	width: 100px;
 }
 
 .col4 {
-	width: 50px;
+	width: 60px;
 }
 
 .col5 {
-	width: 50px;
+	width: 60px;
 }
 
 .col6 {
-	width: 50px;
+	width: 60px;
 }
 
-#line {
-	color: gray;
-}
+

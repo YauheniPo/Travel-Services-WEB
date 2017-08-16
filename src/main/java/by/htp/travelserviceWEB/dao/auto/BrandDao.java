@@ -4,8 +4,8 @@ import java.util.Map;
 
 import by.htp.travelserviceWEB.entity.Entity;
 
-public interface BodyTypeDao {
+public interface BrandDao {
 
-	Map<Integer, Entity> fetchListOfTheBodyTypes(Entity entity);
+	Map<Integer, Entity> fetchListOfTheBrands(Entity entity);
 	
 }

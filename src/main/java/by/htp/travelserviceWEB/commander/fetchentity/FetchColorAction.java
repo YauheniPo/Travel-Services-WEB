@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.travelserviceWEB.commander.CommandAction;
 import by.htp.travelserviceWEB.entity.Entity;
-import by.htp.travelserviceWEB.entity.auto.Salon;
-import by.htp.travelserviceWEB.service.auto.SalonService;
-import by.htp.travelserviceWEB.service.auto.impl.SalonServiceImpl;
+import by.htp.travelserviceWEB.entity.auto.Color;
+import by.htp.travelserviceWEB.service.auto.ColorService;
+import by.htp.travelserviceWEB.service.auto.impl.ColorServiceImpl;
 
-public class FetchSalonAction implements CommandAction {
+public class FetchColorAction implements CommandAction {
 	
-	private SalonService salonService;
+	private ColorService colorService;
 	
-	public FetchSalonAction() {
-		salonService = SalonServiceImpl.getInstance();
+	public FetchColorAction() {
+		colorService = ColorServiceImpl.getInstance();
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class FetchSalonAction implements CommandAction {
 			throws ServletException, IOException {
 		String page = "jsp/index.jsp";
 		
-		Map<Integer, Entity> map = salonService.fillingListByTheSolons(new Salon());
-		request.setAttribute("salon_map", map);
+		Map<Integer, Entity> map = colorService.fillingListByTheColors(new Color());
+		request.setAttribute("color_map", map);
 		
 		return page;
 	}

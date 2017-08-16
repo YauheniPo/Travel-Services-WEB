@@ -4,8 +4,8 @@ import java.util.Map;
 
 import by.htp.travelserviceWEB.entity.Entity;
 
-public interface AutoService {
+public interface BrandService {
 
-	Map<Integer, Entity> fillingListByTheAutoes(Entity entity);
+	Map<Integer, Entity> fillingListByTheBrands(Entity entity);
 	
 }

@@ -1,6 +1,6 @@
 package by.htp.travelserviceWEB.service.hotel.impl;
 
-import java.util.List;
+import java.util.Map;
 
 import by.htp.travelserviceWEB.dao.hotel.HotelDao;
 import by.htp.travelserviceWEB.dao.hotel.impl.HotelDaoImpl;
@@ -10,11 +10,9 @@ import by.htp.travelserviceWEB.service.hotel.HotelService;
 public class HotelServiceImpl implements HotelService {
 	
 	private HotelDao hotelDao;
-	{
-		hotelDao = HotelDaoImpl.getInstance();
-	}
 
 	private HotelServiceImpl() {
+		hotelDao = HotelDaoImpl.getInstance();
 	}
 
 	private static class Singletone {
@@ -26,7 +24,7 @@ public class HotelServiceImpl implements HotelService {
 	}
 
 	@Override
-	public List<Entity> fillingSelectPickUpHotel(Entity entity) {
-		return hotelDao.fetchHotelName(entity);
+	public Map<Integer, Entity> fillingListByTheHotels(Entity entity) {
+		return hotelDao.fetchListOfTheHotels(entity);
 	}
 }

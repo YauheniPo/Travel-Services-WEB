@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.travelserviceWEB.commander.CommandAction;
 import by.htp.travelserviceWEB.entity.Entity;
-import by.htp.travelserviceWEB.entity.auto.Salon;
-import by.htp.travelserviceWEB.service.auto.SalonService;
-import by.htp.travelserviceWEB.service.auto.impl.SalonServiceImpl;
+import by.htp.travelserviceWEB.entity.auto.BodyType;
+import by.htp.travelserviceWEB.service.auto.BodyTypeService;
+import by.htp.travelserviceWEB.service.auto.impl.BodyTypeServiceImpl;
 
-public class FetchSalonAction implements CommandAction {
+public class FetchBodyTypeAction implements CommandAction {
 	
-	private SalonService salonService;
+	private BodyTypeService bodyTypeService;
 	
-	public FetchSalonAction() {
-		salonService = SalonServiceImpl.getInstance();
+	public FetchBodyTypeAction() {
+		bodyTypeService = BodyTypeServiceImpl.getInstance();
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class FetchSalonAction implements CommandAction {
 			throws ServletException, IOException {
 		String page = "jsp/index.jsp";
 		
-		Map<Integer, Entity> map = salonService.fillingListByTheSolons(new Salon());
-		request.setAttribute("salon_map", map);
+		Map<Integer, Entity> map = bodyTypeService.fillingListByTheBodyTypes(new BodyType());
+		request.setAttribute("bodyType_map", map);
 		
 		return page;
 	}
