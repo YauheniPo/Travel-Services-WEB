@@ -5,6 +5,8 @@ The project represents a website, which offers customers 3 types of services rel
 - Hotel room rental
 - Car rental
 
+https://raw.githubusercontent.com/YauheniPo/Travel-Services-WEB/blob/master/screenshots/home_page.PNG
+
 User performs following functions:
 - registration;
 - logging in;
