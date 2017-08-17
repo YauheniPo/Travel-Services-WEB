@@ -5,7 +5,10 @@ The project represents a website, which offers customers 3 types of services rel
 - Hotel room rental
 - Car rental
 
-![alt text](https://raw.githubusercontent.com/YauheniPo/Travel-Services-WEB/blob/master/screenshots/home_page.PNG)
+<br>
+<img height=300 src="https://github.com/YauheniPo/Travel-Services-WEB/blob/master/screenshots/home_page.PNG?raw=true" />
+<br>
+![alt text](https://github.com/YauheniPo/Travel-Services-WEB/blob/master/screenshots/home_page.PNG?raw=true)
 
 User performs following functions:
 - registration;
