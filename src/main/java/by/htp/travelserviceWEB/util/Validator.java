@@ -20,6 +20,8 @@ import by.htp.travelserviceWEB.entity.dto.CustomerTOUpdate;
 
 public class Validator {
 	
+	private static final String FORMAT = ("yyyy-MM-dd");
+	
 	private Validator(){}
 	
 	private static final String LOGIN_REGEX = "[A-z0-9]{3,20}";
@@ -46,7 +48,7 @@ public class Validator {
      * @throws ServletException 
      */
     
-    public static boolean checkForCorrentInputDataCustomer(Entity entity, String repeatPassword) 
+    public static boolean dataRegistration(Entity entity, String repeatPassword) 
     		throws ServletException, IOException {
     	
     	if(entity instanceof CustomerTO) {
@@ -93,7 +95,7 @@ public class Validator {
     	long birthTimeMillis = 0;
 		long todayTimeMillis = 0;
     	
-    	SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+    	SimpleDateFormat formater = new SimpleDateFormat(FORMAT);
 		
 		try {
 			birthTimeMillis = formater.parse(birthday).getTime();
@@ -108,7 +110,7 @@ public class Validator {
 			return true;
 	}
     
-    public static boolean checkForCorrentInputDataAuthoriseUser(CustomerTOLP customerTOLP) {
+    public static boolean dataAuthorisation(CustomerTOLP customerTOLP) {
     	if (null != customerTOLP.getLogin() && null != customerTOLP.getPassword())
     		return Pattern.matches(LOGIN_REGEX, customerTOLP.getLogin())
     				&& Pattern.matches(PASSWORD_REGEX, customerTOLP.getPassword()); 
